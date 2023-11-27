@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default defineNuxtPlugin((nuxtApp) => {
 
-    const { 
+    const {
         apiKey,
         authDomain,
         projectId,

@@ -15,5 +15,11 @@ export default defineNuxtConfig({
       messagingSenderId: process.env.FIRE_MESSAGINGSENDERID,
       appId: process.env.FIRE_APPID
     }
+  },
+  routeRules: {
+    '/**': { prerender: true },
+    '/admin/**': { ssr: false }, //client site rendering
+    '/login': { ssr: false },
+    '/register': { ssr: false }
   }
 })

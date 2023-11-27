@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export const useFirebaseAuth = () => {
     const { $auth } = useNuxtApp()
@@ -26,11 +26,22 @@ export const useFirebaseAuth = () => {
     const logout = async () => {
         await signOut($auth)
         await navigateTo('/login')
-    }
+    };
+
+    const currentUserPromise = () => new Promise((resolve, reject) => {
+        const unsubcribe = onAuthStateChanged($auth, (user) => {
+            unsubcribe();
+            resolve(user);
+        });
+    })
+
+    const infoCurrentUser = $auth.currentUser;
 
     return {
         register,
         login,
-        logout
+        logout,
+        currentUserPromise,
+        infoCurrentUser
     }
 }

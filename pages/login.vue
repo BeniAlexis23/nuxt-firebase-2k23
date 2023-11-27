@@ -25,7 +25,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       title: "Bienvenido, redirigiendo al Dashboard...",
       timeout: 2500,
       callback: async () => {
-        await navigateTo("/dashboard");
+        await navigateTo("/admin");
       },
     });
   } catch (error) {
